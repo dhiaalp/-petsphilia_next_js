@@ -1,5 +1,5 @@
 [build]
-dockerfilePath = "apps/storefront/Dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
 healthcheckPath = "/"

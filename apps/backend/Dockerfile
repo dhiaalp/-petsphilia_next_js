@@ -1,16 +1,10 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copy only the backend package.json (standalone install, no workspace)
-COPY apps/backend/package.json ./package.json
-
-# Install dependencies
+COPY package.json ./
 RUN npm install
 
-# Copy backend source
-COPY apps/backend ./
-
-# Build Medusa
+COPY . ./
 RUN npx medusa build
 
 FROM node:20-alpine AS runner

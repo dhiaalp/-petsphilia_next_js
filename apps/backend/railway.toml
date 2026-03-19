@@ -1,5 +1,5 @@
 [build]
-dockerfilePath = "apps/backend/Dockerfile"
+dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "npx medusa start"

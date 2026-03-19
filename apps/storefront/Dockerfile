@@ -1,14 +1,10 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Copy only the storefront package.json (no workspace - avoids React 18 hoisting from backend)
-COPY apps/storefront/package.json ./package.json
-
-# Install dependencies directly (not as a workspace)
+COPY package.json ./
 RUN npm install
 
-# Copy storefront source
-COPY apps/storefront ./
+COPY . ./
 
 ARG NEXT_PUBLIC_MEDUSA_BACKEND_URL
 ARG NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
