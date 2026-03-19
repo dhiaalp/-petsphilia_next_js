@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "medusa develop",
     "build": "medusa build",
-    "start": "medusa start"
+    "migrate": "medusa db:migrate",
+    "start": "npm run migrate && medusa start --verbose"
   },
   "dependencies": {
     "@medusajs/admin-sdk": "^2.13.4",
