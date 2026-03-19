@@ -6,11 +6,15 @@ const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-script",
   weight: ["400", "600", "700", "800", "900"],
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {
