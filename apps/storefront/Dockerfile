@@ -31,7 +31,6 @@ COPY --from=builder /app/.next/static ./.next/static
 RUN mkdir -p public/uploads
 
 EXPOSE 3000
-ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+CMD HOSTNAME=0.0.0.0 node server.js
