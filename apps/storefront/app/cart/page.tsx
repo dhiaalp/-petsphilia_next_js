@@ -4,6 +4,9 @@ export const dynamic = "force-dynamic";
 import { getOrCreateCart, getLocalCart } from "@/lib/cart";
 import { formatMoney } from "@/lib/medusa";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type CartItem = any;
+
 export default async function CartPage() {
   const data = await getOrCreateCart().catch(() => null);
   const cart = data?.cart;
@@ -39,7 +42,7 @@ export default async function CartPage() {
           <div className="cart-layout">
             <div className="cart-items">
               {/* Medusa cart items */}
-              {hasMedusaItems && cart.items!.map((item) => {
+              {hasMedusaItems && cart.items!.map((item: CartItem) => {
                 const meta = (item.metadata ?? {}) as Record<string, string>;
                 const isCustom = String(meta.is_customized) === "true";
                 const artworkUrl = meta.custom_artwork;
