@@ -1,8 +1,11 @@
 node_modules
-.next
 .git
+.next
+.turbo
+dist
+build
+coverage
+.DS_Store
 .env
 .env.local
 .env.*.local
-*.md
-.DS_Store
