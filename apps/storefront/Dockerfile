@@ -2,6 +2,8 @@ FROM node:20-alpine AS deps
 WORKDIR /app
 
 COPY package*.json ./
+COPY apps/storefront/package*.json ./apps/storefront/
+COPY apps/backend/package*.json ./apps/backend/
 RUN npm ci
 
 FROM node:20-alpine AS builder
@@ -20,6 +22,7 @@ ENV NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=$NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
 ENV NEXT_PUBLIC_DEFAULT_REGION_ID=$NEXT_PUBLIC_DEFAULT_REGION_ID
 ENV GEMINI_API_KEY=$GEMINI_API_KEY
 
+WORKDIR /app/apps/storefront
 RUN npm run build
 
 FROM node:20-alpine AS runner
@@ -28,9 +31,9 @@ ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
 ENV PORT=3000
 
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/apps/storefront/public ./public
+COPY --from=builder /app/apps/storefront/.next/standalone ./
+COPY --from=builder /app/apps/storefront/.next/static ./.next/static
 
 EXPOSE 3000
 CMD ["node", "server.js"]
